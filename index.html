@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Armstrong Ceiling Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts for better typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (Integrity and crossorigin attributes removed) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-ceiling"></i> Armstrong Ceiling Calculator</h1>
+    </header>
+
+    <main>
+        <section id="input-section">
+            <h2>Design Parameters</h2>
+            <form id="calculator-form">
+                <div class="form-group">
+                    <label for="room-length">Room Length (mm):</label>
+                    <input type="number" id="room-length" placeholder="e.g., 5000" required aria-label="Room Length in millimeters">
+                </div>
+                <div class="form-group">
+                    <label for="room-width">Room Width (mm):</label>
+                    <input type="number" id="room-width" placeholder="e.g., 4000" required aria-label="Room Width in millimeters">
+                </div>
+                <div class="form-group">
+                    <label for="tile-size">Tile Size (mm):</label>
+                    <select id="tile-size" aria-label="Tile Size Selection">
+                        <option value="600x600">600 x 600</option>
+                        <option value="1200x600">1200 x 600</option>
+                        <option value="600x1200">600 x 1200</option>
+                        <!-- Add more options if needed -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="rotation-angle">Tile Rotation Angle (degrees):</label>
+                    <input type="number" id="rotation-angle" value="0" min="0" max="360" aria-label="Tile Rotation Angle in Degrees">
+                </div>
+                <div class="form-group">
+                    <label for="shift-horizontal">Shift Horizontal (mm):</label>
+                    <input type="number" id="shift-horizontal" value="0" aria-label="Horizontal Shift in Millimeters">
+                </div>
+                <div class="form-group">
+                    <label for="shift-vertical">Shift Vertical (mm):</label>
+                    <input type="number" id="shift-vertical" value="0" aria-label="Vertical Shift in Millimeters">
+                </div>
+                <div class="form-group">
+                    <label for="alignment">Tile Alignment:</label>
+                    <select id="alignment" aria-label="Tile Alignment Selection">
+                        <option value="standard">Standard</option>
+                        <option value="staggered">Staggered</option>
+                        <!-- Add more alignment options as needed -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="frame-rotation">Frame Rotation:</label>
+                    <select id="frame-rotation" aria-label="Frame Rotation Selection">
+                        <option value="0">0°</option>
+                        <option value="90">90°</option>
+                        <option value="180">180°</option>
+                        <option value="270">270°</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="assembly-diagram">Assembly Diagram Type:</label>
+                    <select id="assembly-diagram" aria-label="Assembly Diagram Type Selection">
+                        <option value="type1">Type 1</option>
+                        <option value="type2">Type 2</option>
+                        <option value="type3">Type 3</option>
+                    </select>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit"><i class="fas fa-calculator"></i> Calculate</button>
+                    <button type="reset" id="reset-button"><i class="fas fa-undo"></i> Reset</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="summary-section">
+            <h2>Summary</h2>
+            <div class="summary-card">
+                <div class="summary-item">
+                    <i class="fas fa-ruler-combined"></i>
+                    <div>
+                        <h3>Total Area</h3>
+                        <p id="total-area">0 m²</p>
+                    </div>
+                </div>
+                <div class="summary-item">
+                    <i class="fas fa-border-all"></i>
+                    <div>
+                        <h3>Total Perimeter</h3>
+                        <p id="total-perimeter">0 m</p>
+                    </div>
+                </div>
+            </div>
+            <!-- New Dimensions Display -->
+            <div class="dimensions-card">
+                <h3>Room Dimensions</h3>
+                <p id="room-dimensions">Length: 0 mm, Width: 0 mm</p>
+            </div>
+        </section>
+
+        <section id="output-section">
+            <h2>Material Breakdown</h2>
+            <div class="material-list">
+                <div class="material-card">
+                    <h3><i class="fas fa-square"></i> Ceiling Tiles</h3>
+                    <p id="tiles-count">0</p>
+                </div>
+                <div class="material-card">
+                    <h3><i class="fas fa-ruler"></i> Main Runners</h3>
+                    <p id="main-runners-count">0</p>
+                </div>
+                <div class="material-card">
+                    <h3><i class="fas fa-ruler-combined"></i> Cross Tees</h3>
+                    <p id="cross-tees-count">0</p>
+                </div>
+                <div class="material-card">
+                    <h3><i class="fas fa-wired-network"></i> Suspension Wires</h3>
+                    <p id="suspension-wires-count">0</p>
+                </div>
+                <div class="material-card">
+                    <h3><i class="fas fa-border-style"></i> Perimeter Trims</h3>
+                    <p id="perimeter-trims-count">0</p>
+                </div>
+            </div>
+            <!-- Removed all other labels -->
+        </section>
+
+        <section id="visualization-section">
+            <h2>Grid Visualization</h2>
+            <div class="canvas-container">
+                <canvas id="grid-canvas" width="1500" height="1200"></canvas>
+            </div>
+            <!-- Download Button -->
+            <button id="download-button"><i class="fas fa-download"></i> Download Image</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Armstrong Ceiling Calculator. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
